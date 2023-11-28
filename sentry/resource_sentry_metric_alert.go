@@ -348,7 +348,7 @@ func expandMetricAlertTriggerActions(actionList []interface{}) []*sentry.MetricA
 		}
 		if v, ok := actionMap["target_identifier"].(string); ok {
 			if v != "" {
-				action.TargetIdentifier = sentry.String(v)
+				action.TargetIdentifier = sentry.InterfaceString(v)
 			}
 		}
 		if v, ok := actionMap["integration_id"].(int); ok {

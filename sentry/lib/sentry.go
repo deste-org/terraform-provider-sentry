@@ -432,6 +432,15 @@ func Float64Value(v *float64) float64 {
 // String returns a pointer to the string value passed in.
 func String(v string) *string { return &v }
 
+func InterfaceString(v string) *interface{} {
+	var i interface{} = v
+	return &i
+}
+func InterfaceNumber(v json.Number) *interface{} {
+	var i interface{} = v
+	return &i
+}
+
 // StringValue returns the value of the string pointer passed in or
 // "" if the pointer is nil.
 func StringValue(v *string) string {
