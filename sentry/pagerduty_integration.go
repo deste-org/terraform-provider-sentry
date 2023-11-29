@@ -41,9 +41,9 @@ func dataSourcePagerdutyIntegrationRead(ctx context.Context, d *schema.ResourceD
 		return diag.FromErr(err)
 	}
 
-	var pagerdutyIntegrationMap = make(map[string]int)
+	var pagerdutyIntegrationMap = make(map[string]interface{})
 	for _, svc := range pagerDutyIntegration.ConfigData.ServiceTable {
-		pagerdutyIntegrationMap[svc.Service] = svc.Id
+		pagerdutyIntegrationMap[svc.Service] = strconv.Itoa(svc.Id)
 	}
 
 	d.SetId(strconv.Itoa(integrationId))
