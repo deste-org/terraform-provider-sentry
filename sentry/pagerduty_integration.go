@@ -6,6 +6,7 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"strconv"
 )
 
 func dataSourcePagerdutyIntegration() *schema.Resource {
@@ -33,7 +34,7 @@ func dataSourcePagerdutyIntegrationRead(ctx context.Context, d *schema.ResourceD
 	client := meta.(*sentry.Client)
 
 	org := d.Get("organization").(string)
-	integrationId := d.Get("integration_id").(string)
+	integrationId := d.Get("integration_id").(int)
 
 	pagerDutyIntegration, _, err := client.Pagerduty.Get(ctx, org, integrationId)
 	if err != nil {
@@ -45,7 +46,7 @@ func dataSourcePagerdutyIntegrationRead(ctx context.Context, d *schema.ResourceD
 		pagerdutyIntegrationMap[svc.Service] = svc.Id
 	}
 
-	d.SetId(integrationId)
+	d.SetId(strconv.Itoa(integrationId))
 	retErr := multierror.Append(
 		d.Set("organization", org),
 		d.Set("integration_id", integrationId),

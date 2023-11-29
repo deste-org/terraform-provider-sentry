@@ -21,8 +21,8 @@ type PagerdutyIntegration struct {
 }
 type PagerdutyService service
 
-func (s *PagerdutyService) Get(ctx context.Context, organization string, integrationId string) (*PagerdutyIntegration, *Response, error) {
-	u := fmt.Sprintf("0/organizations/%v/integrations/%v/", organization, integrationId)
+func (s *PagerdutyService) Get(ctx context.Context, organization string, integrationId int) (*PagerdutyIntegration, *Response, error) {
+	u := fmt.Sprintf("0/organizations/%v/integrations/%d/", organization, integrationId)
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, nil, err
